@@ -9,26 +9,26 @@ st.set_page_config(
     page_title="Property Price Predictor",
     page_icon="🏠",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="expanded"
 )
 
-# Custom CSS for better styling
+# Custom CSS for better styling with green theme
 st.markdown("""
 <style>
     /* Main background */
     .main {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #2d5016 0%, #16a085 100%);
         padding: 2rem;
     }
     
     /* Header styling */
     .main-header {
-        background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+        background: linear-gradient(90deg, #27ae60 0%, #2ecc71 100%);
         padding: 2rem;
         border-radius: 15px;
         text-align: center;
         margin-bottom: 2rem;
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        box-shadow: 0 8px 32px 0 rgba(46, 204, 113, 0.4);
     }
     
     .main-header h1 {
@@ -40,149 +40,156 @@ st.markdown("""
     }
     
     .main-header p {
-        color: rgba(255,255,255,0.9);
+        color: rgba(255,255,255,0.95);
         font-size: 1.2rem;
         margin: 0;
+        font-weight: 500;
     }
     
     /* Input section styling */
     .input-section {
-        background: rgba(255, 255, 255, 0.95);
+        background: rgba(255, 255, 255, 0.98);
         padding: 2rem;
         border-radius: 20px;
         margin-bottom: 2rem;
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        box-shadow: 0 8px 32px 0 rgba(46, 204, 113, 0.2);
         backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.18);
+        border: 2px solid rgba(46, 204, 113, 0.3);
     }
     
     .input-section h2 {
-        color: #2c3e50;
+        color: #1e8449;
         font-size: 1.8rem;
         margin-bottom: 1.5rem;
         text-align: center;
-        font-weight: 600;
+        font-weight: 700;
+        text-shadow: 1px 1px 2px rgba(30, 132, 73, 0.1);
     }
     
     /* Selectbox styling */
     .stSelectbox > div > div {
-        background: linear-gradient(145deg, #ffffff, #f0f2f6);
-        border: 2px solid #d1d9e6;
+        background: linear-gradient(145deg, #ffffff, #f8fff8);
+        border: 2px solid #a9dfbf;
         border-radius: 12px;
         transition: all 0.3s ease;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 10px rgba(46, 204, 113, 0.15);
     }
     
     .stSelectbox > div > div:hover {
-        border-color: #4facfe;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 15px rgba(79, 172, 254, 0.2);
+        border-color: #27ae60;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(39, 174, 96, 0.25);
     }
     
     .stSelectbox > div > div:focus-within {
-        border-color: #4facfe;
-        box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.15);
-        transform: translateY(-1px);
+        border-color: #27ae60;
+        box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.2);
+        transform: translateY(-2px);
     }
     
     /* Selectbox dropdown arrow styling */
     .stSelectbox svg {
-        color: #667eea !important;
+        color: #27ae60 !important;
     }
     
     /* Number input styling */
     .stNumberInput > div > div {
-        background: linear-gradient(145deg, #ffffff, #f0f2f6);
+        background: linear-gradient(145deg, #ffffff, #f8fff8);
         border-radius: 12px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 10px rgba(46, 204, 113, 0.15);
         transition: all 0.3s ease;
     }
     
     .stNumberInput > div > div > input {
         background: transparent !important;
-        border: 2px solid #d1d9e6 !important;
+        border: 2px solid #a9dfbf !important;
         border-radius: 12px !important;
         padding: 0.75rem 1rem !important;
         font-size: 1rem !important;
-        font-weight: 500 !important;
-        color: #2c3e50 !important;
+        font-weight: 600 !important;
+        color: #1e8449 !important;
         transition: all 0.3s ease !important;
     }
     
     .stNumberInput > div > div > input:hover {
-        border-color: #4facfe !important;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 15px rgba(79, 172, 254, 0.2) !important;
+        border-color: #27ae60 !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(39, 174, 96, 0.25) !important;
     }
     
     .stNumberInput > div > div > input:focus {
-        border-color: #4facfe !important;
-        box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.15) !important;
-        transform: translateY(-1px);
+        border-color: #27ae60 !important;
+        box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.2) !important;
+        transform: translateY(-2px);
         outline: none !important;
     }
     
     /* Number input buttons styling */
     .stNumberInput button {
-        background: linear-gradient(145deg, #667eea, #764ba2) !important;
+        background: linear-gradient(145deg, #27ae60, #2ecc71) !important;
         border: none !important;
         border-radius: 8px !important;
         color: white !important;
-        font-weight: 600 !important;
+        font-weight: 700 !important;
         transition: all 0.3s ease !important;
     }
     
     .stNumberInput button:hover {
-        transform: scale(1.05) !important;
-        box-shadow: 0 2px 8px rgba(116, 75, 162, 0.3) !important;
+        transform: scale(1.1) !important;
+        box-shadow: 0 4px 12px rgba(46, 204, 113, 0.4) !important;
     }
     
     /* Button styling */
     .stButton > button {
-        background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(45deg, #27ae60 0%, #2ecc71 100%);
         color: white;
-        font-weight: 600;
-        font-size: 1.1rem;
-        padding: 0.75rem 2rem;
+        font-weight: 700;
+        font-size: 1.2rem;
+        padding: 1rem 3rem;
         border: none;
-        border-radius: 25px;
-        box-shadow: 0 4px 15px 0 rgba(116, 75, 162, 0.3);
+        border-radius: 30px;
+        box-shadow: 0 6px 20px 0 rgba(46, 204, 113, 0.4);
         transition: all 0.3s ease;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 1.5px;
+        margin: 1rem 0;
     }
     
     .stButton > button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px 0 rgba(116, 75, 162, 0.4);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px 0 rgba(46, 204, 113, 0.5);
+        background: linear-gradient(45deg, #2ecc71 0%, #58d68d 100%);
     }
     
     /* Result styling */
     .result-box {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 2rem;
+        background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        padding: 2.5rem;
         border-radius: 20px;
         text-align: center;
         margin-top: 2rem;
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        box-shadow: 0 10px 40px 0 rgba(46, 204, 113, 0.4);
+        border: 2px solid rgba(255, 255, 255, 0.2);
     }
     
     .result-box h3 {
         color: white;
-        font-size: 1.5rem;
+        font-size: 1.8rem;
         margin-bottom: 1rem;
-        font-weight: 600;
+        font-weight: 700;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     }
     
     .price-range {
-        background: rgba(255, 255, 255, 0.2);
-        padding: 1rem;
+        background: rgba(255, 255, 255, 0.25);
+        padding: 1.5rem;
         border-radius: 15px;
         color: white;
-        font-size: 1.3rem;
-        font-weight: 700;
+        font-size: 1.5rem;
+        font-weight: 800;
         backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     }
     
     /* Column styling */
@@ -190,25 +197,54 @@ st.markdown("""
         padding: 0.5rem;
     }
     
-    /* Label styling */
-    .stSelectbox label, .stNumberInput label {
-        color: #2c3e50 !important;
+    /* AGGRESSIVE TEXT VISIBILITY FIXES - Override all Streamlit defaults */
+    
+    /* Target all possible selectbox text elements */
+    .stSelectbox div,
+    .stSelectbox span,
+    .stSelectbox p,
+    .stSelectbox [data-baseweb="select"] div,
+    .stSelectbox [data-baseweb="select"] span,
+    .stSelectbox [data-testid="stSelectbox"] div,
+    .stSelectbox [data-testid="stSelectbox"] span,
+    .stSelectbox > div > div div,
+    .stSelectbox > div > div span {
+        color: #000000 !important;
+        font-weight: 700 !important;
+        text-shadow: none !important;
+    }
+    
+    /* Force selected value visibility */
+    .stSelectbox [role="button"] div,
+    .stSelectbox [role="button"] span,
+    .stSelectbox [aria-expanded="false"] div,
+    .stSelectbox [aria-expanded="false"] span {
+        color: #000000 !important;
+        font-weight: 700 !important;
+        background-color: transparent !important;
+    }
+    
+    /* Placeholder text - slightly lighter but still visible */
+    .stSelectbox div:first-child {
+        color: #333333 !important;
+        font-style: italic !important;
         font-weight: 600 !important;
-        font-size: 1rem !important;
+    }
+    
+    /* Number input text */
+    .stNumberInput input {
+        color: #000000 !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Labels - keep them dark green */
+    .stSelectbox label, 
+    .stNumberInput label {
+        color: #1e8449 !important;
+        font-weight: 700 !important;
+        font-size: 1.1rem !important;
         margin-bottom: 0.5rem !important;
-    }
-    
-    /* Input field text styling */
-    .stSelectbox div[data-baseweb="select"] > div {
-        font-size: 1rem !important;
-        font-weight: 500 !important;
-        color: #2c3e50 !important;
-        padding: 0.75rem 1rem !important;
-    }
-    
-    /* Placeholder text styling */
-    .stSelectbox div[data-baseweb="select"] > div:first-child {
-        color: #6c757d !important;
+        text-shadow: 1px 1px 2px rgba(30, 132, 73, 0.1);
     }
     
     /* Input container styling */
@@ -225,15 +261,72 @@ st.markdown("""
     /* Error message styling */
     .stAlert {
         background: linear-gradient(145deg, #fff5f5, #fed7d7);
-        border: 2px solid #fc8181;
+        border: 2px solid #e74c3c;
         border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(252, 129, 129, 0.2);
+        box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+    }
+    
+    .stAlert .stMarkdown {
+        color: #c0392b !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Success message styling */
+    .stSuccess {
+        background: linear-gradient(145deg, #f0fff4, #d4edda);
+        border: 2px solid #27ae60;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+    }
+    
+    /* Footer styling */
+    .footer {
+        text-align: center;
+        padding: 2rem;
+        color: rgba(255,255,255,0.9);
+        font-weight: 600;
+        font-size: 1rem;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
     }
     
     /* Hide Streamlit default elements */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
+    
+    /* SUPER AGGRESSIVE DROPDOWN FIXES */
+    .stSelectbox div[role="listbox"] {
+        background: white !important;
+        border: 2px solid #27ae60 !important;
+        border-radius: 10px !important;
+        box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3) !important;
+    }
+    
+    .stSelectbox div[role="listbox"] div,
+    .stSelectbox div[role="listbox"] span,
+    .stSelectbox [role="option"],
+    .stSelectbox [role="option"] div,
+    .stSelectbox [role="option"] span {
+        color: #000000 !important;
+        font-weight: 700 !important;
+        background: white !important;
+    }
+    
+    .stSelectbox div[role="listbox"] div:hover,
+    .stSelectbox [role="option"]:hover {
+        background: #f0fff4 !important;
+        color: #000000 !important;
+    }
+    
+    /* Nuclear option - force ALL text in selectbox to be black */
+    .stSelectbox * {
+        color: #000000 !important;
+    }
+    
+    /* Selectbox container background to ensure contrast */
+    .stSelectbox > div > div {
+        background: white !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -340,7 +433,7 @@ if predict_button:
             <div class="price-range">
                 ₹ {round(low, 2)} Cr - ₹ {round(high, 2)} Cr
             </div>
-            <p style="color: rgba(255,255,255,0.8); margin-top: 1rem; font-size: 0.9rem;">
+            <p style="color: rgba(255,255,255,0.9); margin-top: 1rem; font-size: 1rem; font-weight: 500;">
                 *Price estimate based on current market trends and property features
             </p>
         </div>
@@ -348,7 +441,7 @@ if predict_button:
 
 # Footer
 st.markdown("""
-<div style="text-align: center; padding: 2rem; color: rgba(255,255,255,0.7);">
+<div class="footer">
     <p>Built with ❤️ using Streamlit | Property Price Prediction ML Model</p>
 </div>
 """, unsafe_allow_html=True)
